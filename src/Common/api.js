@@ -1,8 +1,8 @@
-// async function api (opt) {
+// aynsc/await写法，设计兼容性
 const api = async (opt) => {
     try {
         let resp = await FetchApi(opt);
-        let data = resp.json();
+        let data = await resp.json();
         return data;
     } catch(e) {
         console.log("发生错误啦！", e, JSON.stringify(e));
@@ -11,10 +11,11 @@ const api = async (opt) => {
 
 // //fetch请求函数
 const FetchApi = (opt) => {
+    opt.data = opt.data ? opt.data : {};
     let dataBool = Object.keys(opt.data).length > 0;
-    let newData = dataBool ? transformParam(opt) : {};
-    fetch(opt.url, {
-        method: opt.method ? opt.method : 'GET',
+    let newData = dataBool && transformParam(opt);
+    return fetch(opt.url, {
+        method: opt.method ? opt.method : 'POST',
         headers: opt.headers ? opt.headers : {},
         body: newData,
         mode: opt.mode ? opt.mode : '',
@@ -35,13 +36,14 @@ const transformParam = (opt) => {
         return Form;
     }
 
-    // if(opt.headers['Content-Type'] == 'application/json') {
-    //     return JSON.stringify(opt.data);
-    // }
-
     //默认返回json格式数据
     return JSON.stringify(opt.data);
-
 };
+
+
+//promise 版本
+// const api = function() {
+
+// }
 
 export default api;

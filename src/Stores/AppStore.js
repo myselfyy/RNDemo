@@ -21,7 +21,7 @@ class AppStore extends ReduceStore {
             case AppTypes.GETAPPLIST:
                 return {
                     ...state,
-                    list: action.data
+                    list: action.data.data.list
                 }
                 break;
             default:
