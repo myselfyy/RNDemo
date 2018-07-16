@@ -11,6 +11,9 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import AppStore from '../src/Stores/AppStore';
+import AppApi from '../src/Api/AppApi';
+
+// const { api } = config; 
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -32,11 +35,11 @@ class App extends Component {
     }
 
     componentDidMount() {
-        // http://lc-OnsG2j7w.cn-n1.lcfile.com/fb7da6ab50a0975fc195.json
-        console.log("输出设备信息", Platform, fetch, config);
+        AppApi.getList();
     }
 
     render() {
+        console.log("state数据", this.state.list);
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>Welcome to React Native!</Text>

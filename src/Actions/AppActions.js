@@ -10,7 +10,7 @@ const AppActions = {
     //首页获取列表数据
     getAppList(data) {
         dispatcher({
-            type: AppTypes.GETAPPLIST,
+            type: "GETAPPLIST",
             data: data
         });
     }

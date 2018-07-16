@@ -1,11 +1,11 @@
 // async function api (opt) {
-const api = async () => {
+const api = async (opt) => {
     try {
         let resp = await FetchApi(opt);
         let data = resp.json();
         return data;
     } catch(e) {
-        console.log("发生错误啦！", JSON.stringify(e));
+        console.log("发生错误啦！", e, JSON.stringify(e));
     }
 };
 

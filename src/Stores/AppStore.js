@@ -5,7 +5,7 @@
  */
 
 import { ReduceStore } from 'flux/utils';
-import AppActions from '../Actions/AppActions';
+import AppTypes from '../ActionTypes/AppTypes';
 import AppDispatche from '../Dispatcher/Dispatcher';
 
 class AppStore extends ReduceStore {
@@ -18,7 +18,7 @@ class AppStore extends ReduceStore {
 
     reduce (state, action) {
         switch(action.type) {
-            case AppActions.GETAPPLIST:
+            case AppTypes.GETAPPLIST:
                 return {
                     ...state,
                     list: action.data
