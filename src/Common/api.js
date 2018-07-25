@@ -1,3 +1,4 @@
+const host = "";
 // aynsc/await写法，设计兼容性
 const api = async (opt) => {
     try {
@@ -14,7 +15,7 @@ const FetchApi = (opt) => {
     opt.data = opt.data ? opt.data : {};
     let dataBool = Object.keys(opt.data).length > 0;
     let newData = dataBool && transformParam(opt);
-    return fetch(opt.url, {
+    return fetch(host + opt.url, {
         method: opt.method ? opt.method : 'POST',
         headers: opt.headers ? opt.headers : {},
         body: newData,
@@ -31,7 +32,7 @@ const transformParam = (opt) => {
     if(opt.headers['Content-Type'] && opt.headers['Content-Type'] == 'application/x-www-form-urlencoded') {
         const Form = new FormData();
         for(let key in opt.data) {
-            Form.append(key, value);
+            Form.append(key, opt.data[key]);
         }
         return Form;
     }
@@ -41,9 +42,19 @@ const transformParam = (opt) => {
 };
 
 
-//promise 版本
-// const api = function() {
-
+//promise 版本 区分get / post方法
+// const api = function(url, options) {
+//     fetch(url, options).then((response) => {
+//         if(response.ok) {
+//             return  response.json();
+//         } else {
+//             console.log("there are something worry", response.status);
+//         }
+//     }).then((resp) => {
+//         return resp;
+//     }).catch(e => {
+//         console.log("Error" + e);
+//     })
 // }
 
 export default api;
