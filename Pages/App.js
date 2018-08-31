@@ -37,7 +37,6 @@ class App extends Component {
 
     render() {
         const {list} = this.state;
-        console.log(list);
         return (
             <View style={styles.container}>
                 {list.length > 0 && this.showRender()}
